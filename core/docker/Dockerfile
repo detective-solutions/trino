@@ -42,4 +42,7 @@ COPY --chown=trino:trino scripts ./usr/local/trino/scripts
 
 USER trino:trino
 ENV LANG en_US.UTF-8
-# CMD ["/usr/lib/trino/bin/run-trino"]
+
+CMD ["/usr/lib/trino/bin/run-trino"]
+HEALTHCHECK --interval=10s --timeout=5s --start-period=10s \
+  CMD /usr/lib/trino/bin/health-check
