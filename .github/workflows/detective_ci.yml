@@ -22,8 +22,7 @@ jobs:
           cache: 'maven'
 
       - name: Run maven build
-        # Only build trino-server & trino-cli modules
-        run: ./mvnw clean install -pl core/trino-server -DskipTests
+        run: ./mvnw clean install -DskipTests
 
       - name: Build base image
         run: ./core/docker/build.sh -a amd64
