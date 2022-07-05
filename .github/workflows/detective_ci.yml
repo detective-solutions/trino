@@ -20,7 +20,7 @@ jobs:
         with:
           repository: detective-solutions/trino-configuration
           path: trino-configuration
-          token: ${{CI_GITHUB_ACCESS_TOKEN}}
+          token: ${{secrets.CI_GITHUB_ACCESS_TOKEN}}
 
       - name: Setup Java
         uses: actions/setup-java@v3
