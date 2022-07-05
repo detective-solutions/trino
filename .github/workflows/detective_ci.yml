@@ -15,13 +15,6 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      - name: Checkout custom trino configuration
-        uses: actions/checkout@v3
-        with:
-          repository: detective-solutions/trino-configuration
-          path: trino-configuration
-          token: ${{secrets.CI_GITHUB_ACCESS_TOKEN}}
-
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -37,3 +30,13 @@ jobs:
 
       - name: Build docker base image
         run: ./core/docker/build.sh -a amd64
+
+      - name: Checkout custom trino configuration
+        uses: actions/checkout@v3
+        with:
+          repository: detective-solutions/trino-configuration
+          path: trino-configuration
+          token: ${{secrets.CI_GITHUB_ACCESS_TOKEN}}
+
+      - name: Build custom trino coordinator image
+        run: docker build -f trino-configuration/coordinator/Dockerfile -t trino-coordinator:1.0.0-beta .
